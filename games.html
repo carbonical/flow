@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Game Cards with Toggle</title>
+  <title>extensionstuff</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
     @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
@@ -16,7 +16,7 @@
       color: white;
     }
 
-    .game-container {
+    .ext-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 0fr));
       gap: 20px;
@@ -24,7 +24,7 @@
       justify-items: center;
     }
 
-    .game-card {
+    .ext-card {
       position: relative;
       width: 300px;
       height: 180px;
@@ -36,12 +36,12 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .game-card:hover {
+    .ext-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
     }
 
-    .game-card img {
+    .ext-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -145,40 +145,40 @@
 </head>
 <body>
 
-  <div class="game-container" id="game-container">
-    <!-- Game cards will be injected here -->
+  <div class="ext-container" id="ext-container">
+    <!-- Ext cards will be injected here -->
   </div>
 
   <script>
-    const gamesData = [
+    const extsData = [
       {
-        name: "Game One",
-        image: "https://placehold.co/300x180",
-        description: "This is the first game.",
+        name: "Extension",
+        image: "https://placehold.co/300x180?text=placeholder",
+        description: "placeholder",
         author: "adminlisted",
         url: "#"
       },
       {
-        name: "Game Two",
-        image: "https://placehold.co/300x180?text=Game+2",
-        description: "This is the second game.",
+        name: "Extension",
+        image: "https://placehold.co/300x180?text=placeholder",
+        description: "placeholder",
         author: "adminlisted",
         url: "#"
       }
     ];
 
-    function createGameCards() {
-      const container = document.getElementById('game-container');
+    function createExtCards() {
+      const container = document.getElementById('ext-container');
       container.innerHTML = '';
 
-      gamesData.forEach(game => {
+      extsData.forEach(ext => {
         const card = document.createElement('div');
-        card.classList.add('game-card');
+        card.classList.add('ext-card');
         card.innerHTML = `
-          <img src="${game.image}" alt="Game Image">
+          <img src="${ext.image}" alt="Ext Image">
           <div class="overlay">
-            <h3>${game.name}</h3>
-            <p>${game.description}</p>
+            <h3>${ext.name}</h3>
+            <p>${ext.description}</p>
           </div>
           <div class="toggle-container">
             <span>Toggle</span>
@@ -192,7 +192,7 @@
       });
     }
 
-    window.onload = createGameCards;
+    window.onload = createExtCards;
   </script>
 
 </body>
