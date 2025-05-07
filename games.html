@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Game Cards with Toggle</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+      color: white;
+    }
+
+    .game-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 0fr));
+      gap: 20px;
+      padding: 60px 20px;
+      justify-items: center;
+    }
+
+    .game-card {
+      position: relative;
+      width: 300px;
+      height: 180px;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+      background-color: #1b1b1b;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .game-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      padding: 10px 15px;
+      padding-bottom: 50px; /* Reserve space for toggle */
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .overlay h3 {
+      margin: 0 0 5px 0;
+      font-size: 18px;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .overlay p {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 400;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .toggle-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgba(10, 31, 31, 0.85);
+      padding: 6px 12px;
+      border-radius: 0 0 15px 15px;
+      box-sizing: border-box;
+      z-index: 2;
+      font-size: 14px;
+    }
+
+    /* Toggle switch style */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 36px;
+      height: 20px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 20px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 14px;
+      width: 14px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    .switch input:checked + .slider {
+      background-color: #1a9b8a;
+    }
+
+    .switch input:checked + .slider:before {
+      transform: translateX(16px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-container" id="game-container">
+    <!-- Game cards will be injected here -->
+  </div>
+
+  <script>
+    const gamesData = [
+      {
+        name: "Game One",
+        image: "https://placehold.co/300x180",
+        description: "This is the first game.",
+        author: "adminlisted",
+        url: "#"
+      },
+      {
+        name: "Game Two",
+        image: "https://placehold.co/300x180?text=Game+2",
+        description: "This is the second game.",
+        author: "adminlisted",
+        url: "#"
+      }
+    ];
+
+    function createGameCards() {
+      const container = document.getElementById('game-container');
+      container.innerHTML = '';
+
+      gamesData.forEach(game => {
+        const card = document.createElement('div');
+        card.classList.add('game-card');
+        card.innerHTML = `
+          <img src="${game.image}" alt="Game Image">
+          <div class="overlay">
+            <h3>${game.name}</h3>
+            <p>${game.description}</p>
+          </div>
+          <div class="toggle-container">
+            <span>Toggle</span>
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    window.onload = createGameCards;
+  </script>
+
+</body>
+</html>
